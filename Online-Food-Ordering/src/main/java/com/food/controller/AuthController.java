@@ -82,7 +82,6 @@ public class AuthController {
         return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
     }
 
-
     @PostMapping("/signin")
     public ResponseEntity<AuthResponse> signIn(@RequestBody LoginRequest req){
 
@@ -91,12 +90,12 @@ public class AuthController {
 
         Authentication authentication = authenticate(username,password);
 
-        String jwt = jwtProvider.generateToken(authentication);
-
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String role = authorities.isEmpty()?null:authorities.iterator().next().getAuthority();
 
-        AuthResponse  authResponse = new AuthResponse();
+        String jwt = jwtProvider.generateToken(authentication);
+
+        AuthResponse authResponse = new AuthResponse();
         authResponse.setJwt(jwt);
         authResponse.setMessage("Login success");
         authResponse.setRole(USER_ROLE.valueOf(role));
@@ -107,11 +106,12 @@ public class AuthController {
     private Authentication authenticate(String username, String password) {
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
 
+
         if(userDetails==null){
             throw new BadCredentialsException("Invalid email !");
         }
 
-        if(!passwordEncoder.matches(password,userDetails.getPassword())){
+        if(!password.equals(userDetails.getPassword())){
             throw new BadCredentialsException("Invalid Password !");
         }
 
