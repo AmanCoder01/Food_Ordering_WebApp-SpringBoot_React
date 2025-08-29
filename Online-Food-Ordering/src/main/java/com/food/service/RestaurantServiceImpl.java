@@ -9,11 +9,14 @@ import com.food.repository.RestaurantRepository;
 import com.food.repository.UserRepository;
 import com.food.request.CreateRestaurantRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+
+@Service
 public class RestaurantServiceImpl implements RestaurantService{
 
     @Autowired
