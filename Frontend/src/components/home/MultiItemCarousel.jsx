@@ -6,9 +6,9 @@ import { topMeal } from './topMeal';
 
 const MultiItemCarousel = () => {
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
-        slidesToShow: 5,
+        slidesToShow: 6,
         slidesToScroll: 1,
         autoplay: true,
         speed: 2000,

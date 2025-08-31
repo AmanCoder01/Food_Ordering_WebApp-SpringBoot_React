@@ -4,8 +4,8 @@ import React from 'react'
 
 const RestaurantCard = () => {
   return (
-    <Card className=' w-[18rem]'>
-        <div className={`${true? "cursor-pointer": "cursor-not-allowed"} relative`}>
+    <Card className=' w-[18rem] hover:scale-105 transition ease-in-out duration-400 '>
+        <div className={`${true? "cursor-pointer": "cursor-not-allowed"} relative `}>
             <img
             className='w-full h-[10rem] rounded-t-md object-cover'
             src="https://images.pexels.com/photos/12737816/pexels-photo-12737816.jpeg" alt="" />

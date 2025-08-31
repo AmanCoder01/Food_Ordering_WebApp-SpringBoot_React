@@ -56,11 +56,11 @@ public class IngredientsController {
     }
 
 
-    @GetMapping("/restaurant/{id}")
-    public ResponseEntity<List<IngredientCategory>> getRestaurantIngredientCategory(@PathVariable Long id,
-                                                                          @RequestHeader("Authorization") String jwt) throws Exception {
-        List<IngredientCategory> ingredientCategories = ingredientsService.findIngredientsCategoryByRestaurantId(id);
-
-        return new ResponseEntity<>(ingredientCategories, HttpStatus.CREATED);
-    }
+//    @GetMapping("/restaurant/{id}")
+//    public ResponseEntity<List<IngredientCategory>> getRestaurantIngredientCategory(@PathVariable Long id,
+//                                                                          @RequestHeader("Authorization") String jwt) throws Exception {
+//        List<IngredientCategory> ingredientCategories = ingredientsService.findIngredientsCategoryByRestaurantId(id);
+//
+//        return new ResponseEntity<>(ingredientCategories, HttpStatus.CREATED);
+//    }
 }
