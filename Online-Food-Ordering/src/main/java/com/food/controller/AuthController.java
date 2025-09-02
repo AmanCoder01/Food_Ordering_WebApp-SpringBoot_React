@@ -49,7 +49,7 @@ public class AuthController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
+    public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception { //done
 
         User isEmailExist= userRepository.findByEmail(user.getEmail());
 
@@ -83,7 +83,7 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<AuthResponse> signIn(@RequestBody LoginRequest req){
+    public ResponseEntity<AuthResponse> signIn(@RequestBody LoginRequest req){ //done
 
         String username = req.getEmail();
         String password = req.getPassword();

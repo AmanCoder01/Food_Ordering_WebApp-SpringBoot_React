@@ -30,6 +30,10 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public Restaurant createRestaurant(CreateRestaurantRequest req, User user) {
+        if (restaurantRepository.findByOwnerId(user.getId()) != null) {
+            throw new RuntimeException("User already owns a restaurant");
+        }
+
 
         Address address = addressRepository.save(req.getAddress());
 

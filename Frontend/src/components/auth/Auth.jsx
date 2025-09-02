@@ -9,11 +9,13 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  width: 500,
+  bgcolor: '#fff9f6',
+  border: '#ddd',
   boxShadow: 24,
+  color:"black",
   p: 4,
+ borderRadius:"10px"
 };
 
 const Auth = () => {
@@ -32,6 +34,8 @@ const Auth = () => {
                 open={location.pathname=== "/account/register"
                     || location.pathname=== "/account/login"
                 }
+                sx={{
+                }}
                 onClose={handleOnClose}
             >
 

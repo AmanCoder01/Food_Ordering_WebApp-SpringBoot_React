@@ -103,6 +103,8 @@ export const logOut = () => async (dispatch) => {
     try {
 
         dispatch({ type: LOGOUT });
+        localStorage.removeItem("jwt");
+
         console.log("logout");
 
 

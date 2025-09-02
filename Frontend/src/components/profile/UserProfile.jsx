@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 const UserProfile = () => {
 
-  const { auth } = useSelector(store => store);
+  const { auth ,theme} = useSelector(store => store);
 
 
   return (
@@ -15,8 +15,8 @@ const UserProfile = () => {
           height: "8rem"
         }} />
 
-        <p className='text-gray-400'>{auth.user?.fullName}</p>
-        <p className='text-gray-400'>{auth.user?.email}</p>
+        <p className={`${theme.mode === "dark" ? "text-gray-400": "text-gray-700"} text-2xl`}>{auth.user?.fullName}</p>
+        <p className={`${theme.mode === "dark" ? "text-gray-400": "text-gray-700"} text-xl`}>{auth.user?.email}</p>
 
       </div>
     </div>

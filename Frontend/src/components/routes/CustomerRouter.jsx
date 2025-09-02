@@ -7,10 +7,10 @@ import Cart from '../cart/Cart'
 import Profile from '../profile/Profile'
 import Auth from '../auth/Auth'
 
-const CustomerRouter = ({ mode, setMode }) => {
+const CustomerRouter = () => {
   return (
     <div>
-      <Navbar mode={mode} setMode={setMode} />
+      <Navbar />
 
       <Routes>
         <Route path='/' element={<Home />} />

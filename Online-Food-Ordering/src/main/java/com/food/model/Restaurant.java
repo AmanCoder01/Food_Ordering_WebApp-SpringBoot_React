@@ -1,54 +1,54 @@
-package com.food.model;
+    package com.food.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import jakarta.persistence.*;
+    import lombok.AllArgsConstructor;
+    import lombok.Data;
+    import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+    import java.time.LocalDateTime;
+    import java.util.ArrayList;
+    import java.util.List;
 
-@Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Restaurant {
+    @Entity
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public class Restaurant {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        private Long id;
 
-    @OneToOne
-    private User owner;
+        @OneToOne
+        private User owner;
 
-    private String name;
+        private String name;
 
-    private String description;
+        private String description;
 
-    private String cuisineType;
+        private String cuisineType;
 
-    @OneToOne
-    private Address address;
+        @OneToOne
+        private Address address;
 
-    @Embedded
-    private ContactInformation contactInformation;
+        @Embedded
+        private ContactInformation contactInformation;
 
-    private String openingHours;
+        private String openingHours;
 
-    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Order> orders = new ArrayList<>();
+        @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,orphanRemoval = true)
+        private List<Order> orders = new ArrayList<>();
 
-    @ElementCollection
-    @Column(length = 1000)
-    private List<String> images;
+        @ElementCollection
+        @Column(length = 1000)
+        private List<String> images;
 
-    private LocalDateTime registrationDate;
+        private LocalDateTime registrationDate;
 
-    private boolean open;
+        private boolean open;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Food> foods = new ArrayList<>();
-}
+        @JsonIgnore
+        @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL,orphanRemoval = true)
+        private List<Food> foods = new ArrayList<>();
+    }

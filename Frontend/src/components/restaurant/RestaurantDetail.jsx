@@ -1,7 +1,10 @@
 import { CalendarToday, LocationCity, LocationOn } from '@mui/icons-material'
 import { Divider, FormControl, FormControlLabel, Grid, IconButton, Radio, RadioGroup, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MenuCard from './MenuCard'
+import { useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRestaurantById } from '../../redux/resturantSlice'
 
 const categories = [
     "pizza",
@@ -18,11 +21,25 @@ const foodTypes = [
     { label: "Seasonal", value: "seasonal" }
 ]
 
-const menus = [1,1,1,1,1,1,1]
+const menus = [1, 1, 1, 1, 1, 1, 1]
 
 const RestaurantDetail = () => {
 
+    const  auth  = useSelector((state) => state.auth);
+    const {restaurant}  = useSelector((state) => state.rest);
+
     const [foodType, setFoodType] = useState("all");
+
+    const dispatch = useDispatch();
+
+    const params = useParams();
+
+
+    useEffect(() => {
+        dispatch(getRestaurantById({ id: params.id, jwt: auth.jwt }));
+         window.scrollTo(0, 0);
+    },[])
+
 
     const handleFilter = (e) => {
         console.log(e.target.value, e.target.name);
@@ -32,34 +49,34 @@ const RestaurantDetail = () => {
     return (
         <div className='px-5 lg:px-20'>
             <section className=''>
-                <h3 className='text-gray-500 py-2 mt-10'>Home/India/Indian fast food/3</h3>
+                <h3 className='text-gray-500 py-2 mt-10'>Home/{restaurant?.address?.country}/{restaurant?.name}/{restaurant?.id}</h3>
 
                 <div >
                     <Grid container spacing={2}>
                         <Grid size={12}>
-                            <img src="https://images.pexels.com/photos/12737816/pexels-photo-12737816.jpeg" className='w-full h-[40vh] object-cover' alt="" />
+                            <img src={restaurant?.images[0]} className='w-full h-[40vh] object-cover' alt="" />
                         </Grid>
                         <Grid size={6}>
-                            <img src="https://images.pexels.com/photos/12737816/pexels-photo-12737816.jpeg" className='w-full h-[40vh] object-cover' alt="" />
+                            <img src={restaurant?.images[1]} className='w-full h-[40vh] object-cover' alt="" />
                         </Grid>
                         <Grid size={6}>
-                            <img src="https://images.pexels.com/photos/12737816/pexels-photo-12737816.jpeg" className='w-full h-[40vh] object-cover' alt="" />
+                            <img src={restaurant?.images[2]} className='w-full h-[40vh] object-cover' alt="" />
                         </Grid>
                     </Grid>
                 </div>
 
                 <div className='pt-3 pb-5'>
-                    <h1 className='font-semibold text-4xl'>Indian Fast Food</h1>
+                    <h1 className='font-semibold text-4xl'>{restaurant?.name}</h1>
                     <p className='text-gray-500'>
-                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus facere praesentium expedita deleniti ratione consequuntur! Quos quasi sit quis sunt culpa, error natus at modi ea veritatis iusto quaerat voluptates adipisci doloribus. Vel beatae corporis exercitationem culpa aliquid asperiores blanditiis.</span>
+                        <span>{restaurant?.description}</span>
                     </p>
                     <div className='flex items-center gap-3 mt-3 text-gray-500'>
                         <LocationOn />
-                        <span className='text-gray-500'>Noida</span>
+                        <span className='text-gray-500'>{restaurant?.address?.city}</span>
                     </div>
                     <div className='flex items-center gap-3 text-gray-500 mt-3'>
                         <CalendarToday />
-                        <span className='text-gray-500'>Mon-Sun: 9:00 AM - 9:00 PM (Today)</span>
+                        <span className='text-gray-500'>{restaurant?.openingHours}</span>
                     </div>
                 </div>
             </section>
@@ -86,7 +103,7 @@ const RestaurantDetail = () => {
                                 </RadioGroup>
                             </FormControl>
                         </div>
-                        <Divider/>
+                        <Divider />
                         <div className='mt-5'>
                             <Typography variant='h5' sx={{ paddingBottom: "1rem" }}>
                                 Food Category
@@ -108,11 +125,11 @@ const RestaurantDetail = () => {
                 </div>
 
                 <div className='space-y-5 lg:w-[80%] lg:pl-10 menu'>
-                        {
-                            menus.map((item)=>(
-                                <MenuCard/>
-                            ))
-                        }
+                    {
+                        menus.map((item) => (
+                            <MenuCard />
+                        ))
+                    }
                 </div>
             </section>
         </div>

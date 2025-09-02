@@ -39,7 +39,7 @@ public class RestaurantController {
 
 
     @GetMapping()
-    public ResponseEntity<List<Restaurant>> getAllRestaurant(
+    public ResponseEntity<List<Restaurant>> getAllRestaurant( //done
             @RequestHeader("Authorization") String jwt
     ) throws Exception {
 
@@ -51,21 +51,20 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> findRestaurantById(
+    public ResponseEntity<Restaurant> findRestaurantById( //done
             @RequestHeader("Authorization") String jwt,
             @PathVariable Long id
     ) throws Exception {
-
         User user = userService.findUserByJwtToken(jwt);
 
-        Restaurant restaurant = restaurantService.findRestaurantById(user.getId());
+        Restaurant restaurant = restaurantService.findRestaurantById(id);
 
         return new ResponseEntity<>(restaurant,HttpStatus.OK);
     }
 
 
-    @PutMapping("/{id}/add-favorites")
-    public ResponseEntity<RestaurantDto> addToFavorites(
+    @PutMapping("/{id}/add-favorite")
+    public ResponseEntity<RestaurantDto> addToFavorites( //done
             @RequestHeader("Authorization") String jwt,
             @PathVariable Long id
     ) throws Exception {
